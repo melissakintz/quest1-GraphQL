@@ -13,9 +13,18 @@ const schema = buildSchema(`
     },
     type Mutation {
         updateCourseTopic(id: Int!, topic: String!): Course
-        createCourse(course: Course!): [Course]
+        createCourse(course: CourseInput!): [Course]
     },
     type Course {
+        id: Int
+        title: String
+        author: String
+        description: String
+        topic: String
+        url: String
+    }
+
+    input CourseInput {
         id: Int
         title: String
         author: String
@@ -79,7 +88,8 @@ const updateCourseTopic = ({id, topic}) => {
 }
 
 const createCourse = ({course}) => {
-    return coursesData.push(course)
+    coursesData.push(course);
+    return coursesData;
 }
 
 const getCourseByTitle = ({title}) => {
